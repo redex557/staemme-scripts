@@ -2,7 +2,7 @@
 // @name        	WatchtowerEnhancer
 // @description 	Let's you see when an attack reaches your tower radius
 // @author      	Warre, Max
-// @version     	1.1
+// @version     	1.1.2
 // @grant       	none
 // @include     	https://*.die-staemme.de*screen=overview_villages*
 // @include     	https://*.die-staemme.de*info_command*type=other*
@@ -210,7 +210,7 @@ var WatchtowerEnhancer = (function() {
 				for (var i = 1, l = $rows.length -1; i < l; i++) {
 					var $this = $rows.eq(i);
 
-					if ($this.find('.quickedit-content').find('a').first().attr('href').match('type=other') && $this.find('.quickedit-content').find('img[src*="/command/attack.png"]').length > 0) {
+					if ($this.find('.quickedit-content').find('a').first().attr('href').match('type=other') ){ //&& $this.find('.quickedit-content').find('img[src*="/command/attack.png"]').length > 0) {
 						var home = $this.find('a[href*="screen=info_village"]').first().text().match(/\d{1,3}\|\d{1,3}/g).slice(-1)[0].toString();
 						var target = $this.find('a[href*="screen=overview"]').first().text().match(/\d{1,3}\|\d{1,3}/g).slice(-1)[0].toString();
 						var intersection = generalFunctions.getIntersections(home, target);
@@ -223,8 +223,13 @@ var WatchtowerEnhancer = (function() {
 							if (typeof extract === 'string') {
 								$this.find('.WatchtowerEnhancer_result').html(extract);
 							} else {
-								$this.find('.WatchtowerEnhancer_result').html('<span class="timer" data-endtime="' + (arival - extract) + '"></span>');
-                                $this.find('.WatchtowerEnhancer_result2').html('<span>'+new Date(extract * 1000).toISOString().substr(11, 8)+'</span>');
+                                if ($this.find('.quickedit-content').find('img[src*="/command/attack.png"]').length > 0){
+                                    $this.find('.WatchtowerEnhancer_result').html('<span class="timer" data-endtime="' + (arival - extract) + '"></span>');
+                                    $this.find('.WatchtowerEnhancer_result2').html('<span>'+new Date(extract * 1000).toISOString().substr(11, 8)+'</span>');
+                                } else {
+                                    $this.find('.WatchtowerEnhancer_result').html('<span class="center">✓</span>');
+                                    $this.find('.WatchtowerEnhancer_result2').html('<span>'+new Date(extract * 1000).toISOString().substr(11, 8)+'</span>');
+                                }
 							}
 						}
 					}
