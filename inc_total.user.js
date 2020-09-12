@@ -8,7 +8,7 @@
 // @include https://*/game.php?village=*&screen=info_village*
 // ==/UserScript==
 
-let titleParent = $("#content_value > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)");
+let titleParent = $("#content_value > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1) > td:first-child()");
 let unitConfig =
     `<h4>Incoming support</h4><span id="supportText"></span>
 <table id="incSupportTable" style="margin-bottom: 10px" class="vis" width="100%">
