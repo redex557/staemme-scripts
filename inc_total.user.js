@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name Show total incoming troops in village info
 // @description Shows the total incoming troops (support and attack) in the village info screen
-// @author FunnyPocketBook
+// @author FunnyPocketBook, Max
 // @version 0.4.4
 // @date 2020-09-12
-// @namespace FunnyPocketBook, Max
+// @namespace FunnyPocketBook
 // @include https://*/game.php?village=*&screen=info_village*
 // ==/UserScript==
 
