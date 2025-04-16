@@ -398,6 +398,7 @@ async function initVillageSnipe(groupId) {
     // action handlers
     calculateLaunchTimes();
     fillLandingTimeFromCommand();
+    fillLandingTimeFromDatabaseCommand();
     filterVillagesByChosenGroup();
     exportBBCode();
     exportConfig();
@@ -797,6 +798,35 @@ function fillLandingTimeFromCommand() {
         }
     });
 }
+
+// Action Handler: When a command from the DB Info script is clicked fill landing time with the landing time of the command
+function fillLandingTimeFromDatabaseCommand() {
+    // add from "/game.php?screen=info_village&id=XXXX" screen
+    jQuery(
+        '#inc_infos table tbody tr.nowrap'
+    ).on('click', function () {
+        try {
+            jQuery(
+                '#inc_infos table tbody tr.nowrap'
+            ).removeClass('ra-chosen-command');
+            jQuery(this).addClass('ra-chosen-command');
+
+            const commandLandingTime = jQuery(this)
+                .find('td:eq(2)')
+                .text()
+                .trim();
+            console.log(`Command landing time: ${commandLandingTime}`);
+            const landingTime = commandLandingTime.replace(/\./g, '/');
+
+            jQuery('#raLandingTime').val(landingTime);
+            UI.SuccessMessage(tt('Landing time was updated!'));
+        } catch (error) {
+            UI.ErrorMessage(tt('There was an error!'));
+            console.error(`Error: `, error);
+        }
+    });
+}
+
 
 // Action Handler: Filter villages shown by selected group
 function filterVillagesByChosenGroup() {
